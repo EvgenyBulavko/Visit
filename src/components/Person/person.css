@@ -1,0 +1,9 @@
+.bar__person{
+    
+}
+.img_person{
+    max-width: 80px;
+}
+.active{
+    border: 5px solid #F06C64;
+}
