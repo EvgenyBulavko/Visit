@@ -4,6 +4,7 @@ import { randomWord } from './Words.js';
 
 import Player from './audio';
 import Person from './Person/person';
+import Lv from './lv/lv';
 
 import step0 from "./images/0.png";
 import step1 from "./images/1.png";
@@ -41,7 +42,8 @@ class Vis extends Component {
       mistake: 0,
       guessed: new Set([]),
       answer: randomWord(),
-      Nam:0
+      Nam:0,
+      lv:0
     }
   }
 
@@ -58,9 +60,9 @@ class Vis extends Component {
   }
 
   generateButtons() {
-    return "abcdefghjklmnopqrstuvwxyz".split("").map(letter => (
+    return "abcdefghijklmnopqrstuvwxyz".split("").map(letter => (
       <button
-        class='btn btn-lg btn-outline-danger m-1'
+        class='btn btn-outline-primary m-1'
         key={letter}
         value={letter}
         onClick={this.handleGuess}
@@ -81,11 +83,18 @@ class Vis extends Component {
 
   updateNam = (value) => {
     this.setState({ Nam: value })
-    console.log(123);
  }
 
+ updateLv = (value) => {
+  this.setState({ lv: value })
+}
+
   render() {
-    const gameOver = this.state.mistake >= this.props.maxWrong;
+    const onKeypress = e => {if(e.code == "Enter"){this.resetButton();}};
+
+  document.addEventListener('keypress', onKeypress);
+  
+    const gameOver = this.state.mistake >= (this.props.maxWrong-this.state.lv);
     const isWinner = this.guessedWord().join("") === this.state.answer;
     let gameStat = this.generateButtons();
 
@@ -101,7 +110,7 @@ class Vis extends Component {
     return (
       <div className="Hangman container">
          <Player/>
-        <div className="float-right">Wrong Guesses: {this.state.mistake} of {this.props.maxWrong}</div>
+        <div className="float-right">Score: {this.state.mistake} of {(this.props.maxWrong-this.state.lv)}</div>
         <div className="text-center">
           <img src={this.props.images[this.state.mistake+(this.state.Nam*7)]} alt=""/>
         </div>
@@ -114,6 +123,7 @@ class Vis extends Component {
           <button className='btn btn-outline-info' onClick={this.resetButton}>Reset</button> 
         </div>
         <Person NamPers={this.updateNam}/>
+        <Lv upLv={this.updateLv}/>
       </div>
     )
   }

@@ -1,18 +1,10 @@
 import React from 'react';
 import './person.css';
 
-//const image = document.getElementById('img_person');
-// image.addEventListener('click', (event) => {
-//             image.querySelectorAll('img').forEach(el => el.classList.remove('active'));
-//             event.target.classList.add('active');
-            
-//  });
 
-
-
-// function N(e) {
-//   if(e==="defaultClass2"){{this.state.Nam =2;}}
-// }
+import head1 from "../images/head1.png";
+import head2 from "../images/head2.png";
+import head3 from "../images/head3.png";
 
 class Person extends React.Component {
 
@@ -41,9 +33,11 @@ class Person extends React.Component {
         
       return (
           <div className="bar__person">
-                <img className={this.state.defaultClass0} onClick={ () => this.editName("defaultClass0")}  src="https://th.wallhaven.cc/small/13/13jqrw.jpg" alt=""/>
-                <img className={this.state.defaultClass1} onClick={ () => this.editName("defaultClass1")}  src="https://th.wallhaven.cc/small/13/13jqrw.jpg" alt=""/>
-                <img className={this.state.defaultClass2}  onClick={ () => this.editName("defaultClass2")} src="https://th.wallhaven.cc/small/13/13jqrw.jpg" alt=""/>
+            <div><a>Choose your character</a>
+              </div>
+                <img className={this.state.defaultClass0} onClick={ () => this.editName("defaultClass0")}  src={head1} alt=""/>
+                <img className={this.state.defaultClass1} onClick={ () => this.editName("defaultClass1")}  src={head2} alt=""/>
+                <img className={this.state.defaultClass2}  onClick={ () => this.editName("defaultClass2")} src={head3} alt=""/>
           </div>
       )
     }
